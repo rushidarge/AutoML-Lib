@@ -48,6 +48,7 @@ class Automl():
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
         self.acc = self.acc.append(new, ignore_index=True)
+        return neigh
 
     def logisticreg(self):
         lr_model = LogisticRegression()
@@ -62,6 +63,7 @@ class Automl():
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
         self.acc = self.acc.append(new, ignore_index=True)
+        return lr_model
 
     def gaussiannb(self):
         gnb = GaussianNB()
@@ -75,7 +77,8 @@ class Automl():
                 ,'Recall score': sm.recall_score(self.y_test,y_pred,average=self.score_type), 'Precision score': sm.precision_score(self.y_test,y_pred,average=self.score_type), \
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
-        self.acc = self.acc.append(new, ignore_index=True)   
+        self.acc = self.acc.append(new, ignore_index=True)
+        return gnb
 
     def decisiontree(self):
         clf_entropy = DecisionTreeClassifier()
@@ -89,7 +92,8 @@ class Automl():
                 ,'Recall score': sm.recall_score(self.y_test,y_pred,average=self.score_type), 'Precision score': sm.precision_score(self.y_test,y_pred,average=self.score_type), \
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
-        self.acc = self.acc.append(new, ignore_index=True)  
+        self.acc = self.acc.append(new, ignore_index=True)
+        return clf_entropy
 
     def svm(self):
         svc_model = SVC()
@@ -103,7 +107,8 @@ class Automl():
                 ,'Recall score': sm.recall_score(self.y_test,y_pred,average=self.score_type), 'Precision score': sm.precision_score(self.y_test,y_pred,average=self.score_type), \
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
-        self.acc = self.acc.append(new, ignore_index=True) 
+        self.acc = self.acc.append(new, ignore_index=True)
+        return svc_model
 
     def randomforest(self):
         Rclf = RandomForestClassifier(random_state=0)
@@ -118,6 +123,7 @@ class Automl():
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
         self.acc = self.acc.append(new, ignore_index=True)
+        return Rclf
 
     def sgdclassifier(self):
         sgdclf = SGDClassifier()
@@ -131,7 +137,8 @@ class Automl():
                 ,'Recall score': sm.recall_score(self.y_test,y_pred,average=self.score_type), 'Precision score': sm.precision_score(self.y_test,y_pred,average=self.score_type), \
                 'F1 score': sm.f1_score(self.y_test,y_pred,average=self.score_type),'time(sec)':end-start} 
         new = pd.Series(data)
-        self.acc = self.acc.append(new, ignore_index=True)  
+        self.acc = self.acc.append(new, ignore_index=True)
+        return sgdclf
 
 class robo(Automl):
     def fit(self):
